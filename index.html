@@ -677,6 +677,11 @@ const PAYMENT_NUMBER = '+966510981470'; // বিকাশ ও নগদ Persona
 // ===== রিফ্রেশ দিলে ফর্ম ডাটা যেন হারিয়ে না যায় (localStorage এ অটো-সেভ/রিস্টোর) =====
 const FORM_STORAGE_KEY = 'order_form_draft';
 
+const URL_HAS_PRODUCT_CODE = (() => {
+  const params = new URLSearchParams(window.location.search);
+  return !!(params.get('codes') || params.get('code'));
+})();
+
 function saveFormDraft() {
   try {
     const draft = {
@@ -693,6 +698,8 @@ function saveFormDraft() {
 }
 
 function restoreFormDraft() {
+  if (URL_HAS_PRODUCT_CODE) return;
+
   let draft;
   try {
     draft = JSON.parse(localStorage.getItem(FORM_STORAGE_KEY) || 'null');
