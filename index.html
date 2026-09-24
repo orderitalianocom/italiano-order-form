@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#f7f8fa">
+  <meta name="theme-color" content="#101114">
   <meta name="apple-mobile-web-app-capable" content="yes">
 
   <title>Premium Order Checkout</title>
@@ -14,7 +14,7 @@
 
   <style>
     :root {
-      --bg: #f5f6f8;
+      --bg: #101114;
       --surface: rgba(255,255,255,.92);
       --surface-solid: #ffffff;
       --text: #15171b;
@@ -65,8 +65,8 @@
       margin: 0;
       min-height: 100vh;
       background:
-        radial-gradient(circle at 10% 0%, rgba(0,0,0,.035), transparent 30%),
-        radial-gradient(circle at 90% 10%, rgba(0,0,0,.025), transparent 28%),
+        radial-gradient(circle at 10% 0%, rgba(115,85,245,.10), transparent 30%),
+        radial-gradient(circle at 90% 8%, rgba(67,136,245,.08), transparent 30%),
         var(--bg);
       color: var(--text);
       font-family: "Hind Siliguri", sans-serif;
@@ -1133,6 +1133,25 @@
       word-break: break-word;
     }
 
+    /* Plain, single-card review lines — matches the simpler original layout */
+
+    .customer-summary-plain {
+      margin: 14px 0 0;
+      padding: 12px 0 2px;
+      border-top: 1px dashed #dfe2e5;
+      display: grid;
+    }
+
+    .customer-summary-plain .price-row span:first-child {
+      color: var(--muted);
+    }
+
+    .customer-summary-plain .price-row strong {
+      max-width: 62%;
+      text-align: right;
+      word-break: break-word;
+    }
+
     /* =========================
        BUTTONS
     ========================== */
@@ -1991,7 +2010,7 @@
 
   <section class="page" id="page3">
 
-    <!-- CUSTOMER REVIEW -->
+    <!-- REVIEW -->
 
     <div class="section-card">
 
@@ -2001,9 +2020,9 @@
           <div class="section-icon">✓</div>
 
           <div>
-            <h2 class="section-title">তথ্য যাচাই করুন</h2>
+            <h2 class="section-title">অর্ডার রিভিউ</h2>
             <p class="section-desc">
-              অর্ডার submit করার আগে সবকিছু দেখে নিন
+              সাবমিট করার আগে সবকিছু দেখে নিন
             </p>
           </div>
         </div>
@@ -2013,35 +2032,13 @@
       </div>
 
       <div
-        id="customerSummary"
-        class="customer-summary"
-      ></div>
-
-    </div>
-
-
-    <!-- ORDER -->
-
-    <div class="section-card">
-
-      <div class="section-head">
-
-        <div class="section-title-wrap">
-          <div class="section-icon">▣</div>
-
-          <div>
-            <h2 class="section-title">অর্ডার সামারি</h2>
-            <p class="section-desc">
-              আপনার নির্বাচিত পণ্য ও মূল্য
-            </p>
-          </div>
-        </div>
-
-      </div>
-
-      <div
         id="summaryItems"
         class="summary-list"
+      ></div>
+
+      <div
+        id="customerSummary"
+        class="customer-summary-plain"
       ></div>
 
       <div
@@ -2075,6 +2072,7 @@
     </div>
 
   </section>
+
 
 </div>
 
@@ -3612,104 +3610,36 @@ function buildSummary() {
     'customerSummary'
   ).innerHTML = `
 
-    <div class="customer-row">
-
-      <div class="customer-row-icon">
-        ◯
-      </div>
-
-      <div>
-        <div class="customer-row-label">
-          নাম
-        </div>
-
-        <div class="customer-row-value">
-          ${escapeHtml(name)}
-        </div>
-      </div>
-
+    <div class="price-row">
+      <span>নাম</span>
+      <strong>${escapeHtml(name)}</strong>
     </div>
 
-
-    <div class="customer-row">
-
-      <div class="customer-row-icon">
-        ⌕
-      </div>
-
-      <div>
-        <div class="customer-row-label">
-          মোবাইল
-        </div>
-
-        <div class="customer-row-value">
-          ${escapeHtml(phone)}
-        </div>
-      </div>
-
+    <div class="price-row">
+      <span>মোবাইল</span>
+      <strong>${escapeHtml(phone)}</strong>
     </div>
 
-
-    <div class="customer-row">
-
-      <div class="customer-row-icon">
-        ⌖
-      </div>
-
-      <div>
-        <div class="customer-row-label">
-          ঠিকানা
-        </div>
-
-        <div class="customer-row-value">
-          ${escapeHtml(address)}
-        </div>
-      </div>
-
+    <div class="price-row">
+      <span>ঠিকানা</span>
+      <strong>${escapeHtml(address)}</strong>
     </div>
 
-
-    <div class="customer-row">
-
-      <div class="customer-row-icon">
-        🚚
-      </div>
-
-      <div>
-        <div class="customer-row-label">
-          Delivery
-        </div>
-
-        <div class="customer-row-value">
-          ${
-            freeDelivery
-              ? 'ফ্রী ডেলিভারি'
-              : `${escapeHtml(area)} · ${money(delivery)}`
-          }
-        </div>
-      </div>
-
+    <div class="price-row">
+      <span>এলাকা</span>
+      <strong>${
+        freeDelivery
+          ? 'ফ্রী ডেলিভারি 🚚'
+          : escapeHtml(area)
+      }</strong>
     </div>
 
     ${
       note
         ? `
-          <div class="customer-row">
-
-            <div class="customer-row-icon">
-              ≡
-            </div>
-
-            <div>
-              <div class="customer-row-label">
-                Note
-              </div>
-
-              <div class="customer-row-value">
-                ${escapeHtml(note)}
-              </div>
-            </div>
-
+          <div class="price-row">
+            <span>নোট</span>
+            <strong>${escapeHtml(note)}</strong>
           </div>
         `
         : ''
@@ -3757,11 +3687,6 @@ function buildSummary() {
 
             <div class="summary-name">
               ${escapeHtml(item.product.name)}
-              ${
-                item.product.free_delivery
-                  ? ' · 🚚 ফ্রী ডেলিভারি'
-                  : ''
-              }
             </div>
 
             <div class="summary-meta">
