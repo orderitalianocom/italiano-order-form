@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#101114">
+  <meta name="theme-color" content="#0a0a0c">
   <meta name="apple-mobile-web-app-capable" content="yes">
 
   <title>Premium Order Checkout</title>
@@ -14,7 +14,7 @@
 
   <style>
     :root {
-      --bg: #101114;
+      --bg: #0a0a0c;
       --surface: rgba(255,255,255,.92);
       --surface-solid: #ffffff;
       --text: #15171b;
@@ -59,15 +59,13 @@
 
     html {
       scroll-behavior: smooth;
+      background: var(--bg);
     }
 
     body {
       margin: 0;
       min-height: 100vh;
-      background:
-        radial-gradient(circle at 10% 0%, rgba(115,85,245,.10), transparent 30%),
-        radial-gradient(circle at 90% 8%, rgba(67,136,245,.08), transparent 30%),
-        var(--bg);
+      background: var(--bg);
       color: var(--text);
       font-family: "Hind Siliguri", sans-serif;
       overflow-x: hidden;
