@@ -95,88 +95,6 @@
     }
 
     /* =========================
-       HEADER
-    ========================== */
-
-    .topbar {
-      position: relative;
-      padding: 16px 4px 13px;
-    }
-
-    .brand-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .brand-left {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      min-width: 0;
-    }
-
-    .brand-mark {
-      width: 46px;
-      height: 46px;
-      flex: 0 0 46px;
-      border-radius: 15px;
-      display: grid;
-      place-items: center;
-      color: white;
-      background:
-        linear-gradient(145deg, #292d32, #090a0b);
-      box-shadow:
-        0 8px 20px rgba(0,0,0,.16),
-        inset 0 1px rgba(255,255,255,.12);
-      font-size: 21px;
-    }
-
-    .brand-info {
-      min-width: 0;
-    }
-
-    .brand-name {
-      font-family: "Manrope", sans-serif;
-      font-size: 14px;
-      font-weight: 800;
-      letter-spacing: .4px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .brand-sub {
-      margin-top: 1px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .secure-pill {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      white-space: nowrap;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.82);
-      border: 1px solid var(--line);
-      color: #555b63;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .25px;
-    }
-
-    .secure-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 0 4px rgba(22,131,75,.1);
-    }
-
-    /* =========================
        STEPPER
     ========================== */
 
@@ -376,16 +294,6 @@
       position: relative;
     }
 
-    .input-icon {
-      position: absolute;
-      left: 13px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #989da4;
-      pointer-events: none;
-      font-size: 14px;
-    }
-
     .input,
     .textarea,
     .code-input {
@@ -397,10 +305,6 @@
       padding: 13px 13px;
       font-size: 13px;
       transition: .22s ease;
-    }
-
-    .input.with-icon {
-      padding-left: 38px;
     }
 
     .textarea {
@@ -1524,10 +1428,6 @@
     }
 
     @media (max-width: 390px) {
-      .secure-pill {
-        display: none;
-      }
-
       .field-row {
         grid-template-columns: 1fr;
         gap: 0;
@@ -1558,28 +1458,6 @@
 <body data-page="page1">
 
 <div class="app-shell" id="mainWrapper">
-
-  <!-- ================= HEADER ================= -->
-
-  <header class="topbar">
-    <div class="brand-row">
-
-      <div class="brand-left">
-        <div class="brand-mark">◈</div>
-
-        <div class="brand-info">
-          <div class="brand-name">YOUR BRAND NAME</div>
-          <div class="brand-sub">অনলাইন অর্ডার ফর্ম</div>
-        </div>
-      </div>
-
-      <div class="secure-pill">
-        <span class="secure-dot"></span>
-        SECURE ORDER
-      </div>
-
-    </div>
-  </header>
 
   <!-- ================= STEPS ================= -->
 
@@ -1641,10 +1519,9 @@
         </label>
 
         <div class="input-wrap">
-          <span class="input-icon">◯</span>
           <input
             id="name"
-            class="input with-icon"
+            class="input"
             type="text"
             placeholder="আপনার পুরো নাম"
             autocomplete="name"
@@ -1660,10 +1537,9 @@
         </label>
 
         <div class="input-wrap">
-          <span class="input-icon">⌕</span>
           <input
             id="phone"
-            class="input with-icon"
+            class="input"
             type="tel"
             placeholder="01XXXXXXXXX"
             inputmode="tel"
