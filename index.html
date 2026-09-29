@@ -184,7 +184,9 @@
 
     .page {
       display: none;
-      animation: pageIn .35s ease both;
+      /* backwards (not both) so no leftover transform is kept after the animation —
+         a transformed ancestor would break the fixed bottom bar */
+      animation: pageIn .35s ease backwards;
     }
 
     .page.active {
@@ -1058,13 +1060,18 @@
        BUTTONS
     ========================== */
 
+    /* Bottom action bar — pinned to the screen bottom, does not scroll with the page */
+
     .page-actions {
-      position: sticky;
-      bottom: 11px;
+      position: fixed;
+      left: 50%;
+      bottom: calc(11px + var(--safe-bottom));
+      transform: translateX(-50%);
+      width: min(calc(100% - 26px), 564px);
       z-index: 20;
       display: flex;
       gap: 8px;
-      margin-top: 14px;
+      margin: 0;
       padding: 8px;
       border: 1px solid rgba(220,223,227,.9);
       border-radius: 19px;
