@@ -184,9 +184,7 @@
 
     .page {
       display: none;
-      /* backwards (not both) so no leftover transform is kept after the animation —
-         a transformed ancestor would break the fixed bottom bar */
-      animation: pageIn .35s ease backwards;
+      animation: pageIn .35s ease both;
     }
 
     .page.active {
@@ -1060,18 +1058,12 @@
        BUTTONS
     ========================== */
 
-    /* Bottom action bar — pinned to the screen bottom, does not scroll with the page */
+    /* Bottom action bar — sits at the end of the page content and scrolls with the page */
 
     .page-actions {
-      position: fixed;
-      left: 50%;
-      bottom: calc(11px + var(--safe-bottom));
-      transform: translateX(-50%);
-      width: min(calc(100% - 26px), 564px);
-      z-index: 20;
       display: flex;
       gap: 8px;
-      margin: 0;
+      margin-top: 14px;
       padding: 8px;
       border: 1px solid rgba(220,223,227,.9);
       border-radius: 19px;
@@ -1656,18 +1648,9 @@
       <button
         type="button"
         id="nextBtn"
-        class="btn btn-primary"
+        class="btn btn-primary btn-success"
       >
-        <span class="cta-main">
-          <span class="cta-title">পরের ধাপে যান</span>
-          <span class="cta-sub">Delivery & Payment</span>
-        </span>
-
-        <span class="cta-total" id="ctaTotal">
-          ৳0
-        </span>
-
-        <span class="arrow">→</span>
+        NEXT
       </button>
 
     </div>
@@ -1868,7 +1851,7 @@
         id="page2BackBtn"
         class="btn btn-secondary"
       >
-        ← ফিরে যান
+        BACK
       </button>
 
       <button
@@ -1876,8 +1859,7 @@
         id="page2ConfirmBtn"
         class="btn btn-primary btn-success"
       >
-        <span class="cta-title">সামারি দেখুন</span>
-        <span class="arrow">→</span>
+        NEXT
       </button>
 
     </div>
@@ -3240,26 +3222,12 @@ function updateBill() {
     getCartItems();
 
 
-  const subtotal =
-    cart.reduce(
-      (sum, item) =>
-        sum + item.total,
-      0
-    );
-
-
   const itemCount =
     cart.reduce(
       (sum, item) =>
         sum + item.qty,
       0
     );
-
-
-  document.getElementById(
-    'ctaTotal'
-  ).textContent =
-    money(subtotal);
 
 
   document.getElementById(
